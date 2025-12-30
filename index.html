@@ -23,7 +23,6 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow-x: hidden;
         }
 
         .container {
@@ -35,12 +34,6 @@
             backdrop-filter: blur(15px);
             border-radius: 28px;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .logo-area {
-            margin-bottom: 35px;
-            transform: rotate(-3deg);
         }
 
         .logo-villafest {
@@ -49,10 +42,6 @@
             line-height: 0.8;
             margin: 0;
             text-transform: uppercase;
-            color: white;
-            text-shadow: 5px 5px 0px rgba(0, 0, 0, 0.8), 
-                         0 0 20px rgba(255, 255, 255, 0.2);
-            letter-spacing: -2px;
         }
 
         .logo-sub {
@@ -60,28 +49,18 @@
             color: var(--accent-color);
             font-size: 1.4rem;
             letter-spacing: 4px;
-            text-transform: uppercase;
-            margin-top: 5px;
-            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
+            margin-bottom: 20px;
         }
 
         input, select {
             width: 100%;
             padding: 16px;
-            margin: 12px 0;
+            margin: 10px 0;
             border-radius: 12px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             background: rgba(0, 0, 0, 0.6);
             color: white;
-            font-size: 16px;
             box-sizing: border-box;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        input:focus, select:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 12px rgba(0, 251, 255, 0.3);
         }
 
         button {
@@ -90,69 +69,30 @@
             border: 2px solid white;
             padding: 15px;
             border-radius: 12px;
-            font-size: 18px;
             font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            margin-top: 20px;
             width: 100%;
-            transition: all 0.3s;
-        }
-
-        button:hover {
-            background-color: white;
-            color: black;
-            transform: scale(1.02);
-        }
-
-        #qr-result {
-            display: none;
-            animation: slideUp 0.5s ease-out;
-        }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            cursor: pointer;
+            margin-top: 10px;
         }
 
         .ticket {
             background: white;
             color: black;
             border-radius: 20px;
-            padding: 25px;
+            padding: 20px;
             margin-top: 10px;
-            box-shadow: 0 10px 30px rgba(0, 251, 255, 0.2);
         }
 
         #staff-name {
             font-family: 'Lilita One', cursive;
-            font-size: 2rem;
-            margin: 10px 0;
+            font-size: 1.8rem;
             text-transform: uppercase;
-            word-wrap: break-word;
-        }
-
-        #staff-pos {
-            font-weight: 700;
-            color: #444;
-            background: #e0faff;
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
         }
 
         #qrcode {
             display: flex;
             justify-content: center;
-            padding: 10px;
-            min-height: 180px;
-        }
-
-        .footer-text {
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.5);
-            margin-top: 25px;
+            margin: 15px 0;
         }
     </style>
 </head>
@@ -160,14 +100,11 @@
 
     <div class="container">
         <div id="registration-form">
-            <div class="logo-area">
-                <h1 class="logo-villafest">VILLA<br>FEST</h1>
-                <div class="logo-sub">4ta Edición</div>
-            </div>
+            <h1 class="logo-villafest">VILLA<br>FEST</h1>
+            <div class="logo-sub">4ta Edición</div>
 
             <form id="villafestForm">
                 <input type="text" id="nombre" placeholder="Nombres y Apellidos" required>
-                
                 <select id="posicion" required>
                     <option value="" disabled selected>Posición de trabajo</option>
                     <option>Grinch</option>
@@ -186,63 +123,44 @@
                     <option>ositos cariñosos</option>
                     <option>otro</option>
                 </select>
-
                 <button type="submit">Generar Pase</button>
             </form>
-            <p class="footer-text">Villafest 4.0 ChaufexProduction &copy; 2025</p>
         </div>
 
-        <div id="qr-result">
+        <div id="qr-result" style="display:none;">
             <div class="ticket">
-                <div style="font-weight: bold; letter-spacing: 2px; font-size: 0.7rem; color: #888;">¿Listo para hoy?</div>
                 <div id="staff-name"></div>
-                <div id="staff-pos"></div>
-                
+                <div id="staff-pos" style="font-weight:bold; color:#555;"></div>
                 <div id="qrcode"></div>
-                
-                <div style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 15px;">
-                    <p style="font-size: 10px; color: #777; margin: 0;">No te olvides de tomarle captura y Presenta este código en el acceso de personal.</p>
-                </div>
+                <p style="font-size:10px;">Presenta este código en el acceso.</p>
             </div>
-            
-            <button onclick="window.print()" style="border-color: var(--accent-color); color: var(--accent-color);">Descargar Pase</button>
-            <button onclick="location.reload()" style="border: none; font-size: 14px; text-decoration: underline; margin-top: 5px;">Volver</button>
+            <button onclick="location.reload()">Volver</button>
         </div>
     </div>
 
     <script>
         document.getElementById('villafestForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
             const nombre = document.getElementById('nombre').value;
             const posicion = document.getElementById('posicion').value;
 
             document.getElementById('registration-form').style.display = 'none';
             document.getElementById('qr-result').style.display = 'block';
-
             document.getElementById('staff-name').innerText = nombre;
             document.getElementById('staff-pos').innerText = posicion;
 
-            // Limpiar el contenedor antes de generar
-            const qrContainer = document.getElementById('qrcode');
-            qrContainer.innerHTML = "";
-
-            // Crear el texto del QR de forma segura
-            const qrText = "VF4-2025-" + nombre.trim().toUpperCase() + "-" + posicion.trim();
-
-            try {
-                new QRCode(qrContainer, {
-                    text: qrText,
-                    width: 180,
-                    height: 180,
-                    colorDark : "#000000",
-                    colorLight : "#ffffff",
-                    correctLevel : QRCode.CorrectLevel.M // Nivel medio para mayor compatibilidad
-                });
-            } catch (err) {
-                console.error("Error al generar QR:", err);
-                qrContainer.innerHTML = "<p style='color:black;font-size:12px;'>Error al generar código. Intenta con un nombre más corto.</p>";
-            }
+            document.getElementById('qrcode').innerHTML = "";
+            
+            // EL CAMBIO CLAVE: Quitamos la restricción de tamaño fijo interna
+            // y usamos una configuración más robusta
+            new QRCode(document.getElementById("qrcode"), {
+                text: "VF4-25-" + nombre.toUpperCase() + "-" + posicion.toUpperCase(),
+                width: 200,
+                height: 200,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.L // Bajamos el nivel de error para que quepa más texto
+            });
         });
     </script>
 </body>
