@@ -195,17 +195,17 @@
             document.getElementById('staff-name').innerText = nombre;
             document.getElementById('staff-pos').innerText = posicion;
 
-            // Generar QR optimizado
-            document.getElementById('qrcode').innerHTML = "";
-            new QRCode(document.getElementById("qrcode"), {
-                text: "VF25-" + nombre.toUpperCase() + "-" + posicion.toUpperCase(),
-                width: 180,
-                height: 180,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.L // Nivel L permite textos mucho más largos
-            });
+            // Generar QR con nivel de corrección L para evitar el error de desbordamiento (overflow)
+new QRCode(document.getElementById("qrcode"), {
+    text: "VF25-" + nombre.toUpperCase().trim() + "-" + posicion.toUpperCase(),
+    width: 180,
+    height: 180,
+    colorDark : "#000000",
+    colorLight : "#ffffff",
+    correctLevel : QRCode.CorrectLevel.L // <-- Este cambio es el que soluciona el error
+});
         });
     </script>
 </body>
 </html>
+
