@@ -62,7 +62,6 @@
             margin-top: 5px;
         }
 
-        /* FORMULARIO */
         input, select {
             width: 100%;
             padding: 16px;
@@ -90,7 +89,6 @@
             width: 100%;
         }
 
-        /* DISEÑO DEL PASE SEGÚN LA IMAGEN */
         #qr-result {
             display: none;
             animation: slideUp 0.4s ease-out;
@@ -107,14 +105,6 @@
             border-radius: 30px;
             padding: 30px 20px;
             margin-bottom: 20px;
-        }
-
-        .ready-text {
-            font-weight: bold;
-            letter-spacing: 1px;
-            font-size: 0.75rem;
-            color: #999;
-            margin-bottom: 10px;
         }
 
         #staff-name {
@@ -148,15 +138,6 @@
             width: 100%;
         }
 
-        .instruction {
-            font-size: 10px;
-            color: #888;
-            line-height: 1.4;
-            padding: 0 10px;
-            margin: 0;
-        }
-
-        /* BOTÓN DE DESCARGA ESTILO NEÓN */
         .btn-download {
             background: #111;
             color: var(--accent-color);
@@ -168,7 +149,6 @@
             width: 100%;
             cursor: pointer;
             text-transform: uppercase;
-            box-shadow: 0 0 15px rgba(0, 251, 255, 0.2);
         }
 
         .btn-back {
@@ -178,8 +158,6 @@
             text-decoration: underline;
             margin-top: 15px;
             cursor: pointer;
-            font-weight: bold;
-            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -215,19 +193,18 @@
                 </select>
                 <button type="submit" class="btn-generate">GENERAR PASE</button>
             </form>
-            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 25px;">Villafest 4.0 ChaufexProduction © 2025</p>
         </div>
 
         <div id="qr-result">
             <div class="ticket">
-                <div class="ready-text">¿Listo para hoy?</div>
+                <div style="font-weight: bold; font-size: 0.75rem; color: #999;">¿Listo para hoy?</div>
                 <div id="staff-name"></div>
                 <div id="staff-pos"></div>
                 
                 <div id="qrcode"></div>
                 
                 <div class="dotted-line"></div>
-                <p class="instruction">No te olvides de tomarle captura y Presenta este código en el acceso de personal.</p>
+                <p style="font-size: 10px; color: #888;">No te olvides de tomarle captura y presenta este código en el acceso.</p>
             </div>
             
             <button class="btn-download" onclick="window.print()">DESCARGAR PASE</button>
@@ -247,13 +224,15 @@
             document.getElementById('staff-pos').innerText = posicion;
 
             document.getElementById('qrcode').innerHTML = "";
+            
+            // Se usa CorrectLevel.M para evitar el error de "overflow" con textos largos
             new QRCode(document.getElementById("qrcode"), {
-                text: "VF4-25-" + nombre.toUpperCase().trim() + "-" + posicion.toUpperCase(),
+                text: "VF25-" + nombre.toUpperCase().trim() + "-" + posicion.toUpperCase(),
                 width: 180,
                 height: 180,
                 colorDark : "#000000",
                 colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.L // Nivel L para permitir textos más largos sin error
+                correctLevel : QRCode.CorrectLevel.M 
             });
         });
     </script>
