@@ -1,13 +1,15 @@
-<html lang="es"><head>
+<!DOCTYPE html>
+<html lang="es">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Villafest 4ta Edición - Registro</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&amp;family=Inter:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Inter:wght@400;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --accent-color: #00fbff; /* El azul vibrante que pediste */
+            --accent-color: #00fbff;
             --bg-dark: #000000;
             --glass-bg: rgba(255, 255, 255, 0.07);
         }
@@ -36,10 +38,9 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* DISEÑO DE LOGO ESTILO PLANET V.M.T */
         .logo-area {
             margin-bottom: 35px;
-            transform: rotate(-3deg); /* Inclinación del logo */
+            transform: rotate(-3deg);
         }
 
         .logo-villafest {
@@ -49,9 +50,7 @@
             margin: 0;
             text-transform: uppercase;
             color: white;
-            text-shadow: 5px 5px 0px rgba(0, 0, 0, 0.8), 
-                         0 0 20px rgba(255, 255, 255, 0.2);
-            letter-spacing: -2px;
+            text-shadow: 5px 5px 0px rgba(0, 0, 0, 0.8);
         }
 
         .logo-sub {
@@ -61,7 +60,6 @@
             letter-spacing: 4px;
             text-transform: uppercase;
             margin-top: 5px;
-            text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
         }
 
         /* FORMULARIO */
@@ -76,18 +74,12 @@
             font-size: 16px;
             box-sizing: border-box;
             outline: none;
-            transition: 0.3s;
         }
 
-        input:focus, select:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 12px rgba(0, 251, 255, 0.3);
-        }
-
-        button {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
+        .btn-generate {
+            background-color: white;
+            color: black;
+            border: none;
             padding: 15px;
             border-radius: 12px;
             font-size: 18px;
@@ -96,40 +88,41 @@
             cursor: pointer;
             margin-top: 20px;
             width: 100%;
-            transition: all 0.3s;
         }
 
-        button:hover {
-            background-color: white;
-            color: black;
-            transform: scale(1.02);
-        }
-
-        /* TARJETA DE PASE (QR) */
+        /* DISEÑO DEL PASE SEGÚN LA IMAGEN */
         #qr-result {
             display: none;
-            animation: slideUp 0.5s ease-out;
+            animation: slideUp 0.4s ease-out;
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(30px); }
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .ticket {
             background: white;
             color: black;
-            border-radius: 20px;
-            padding: 25px;
-            margin-top: 10px;
-            box-shadow: 0 10px 30px rgba(0, 251, 255, 0.2);
+            border-radius: 30px;
+            padding: 30px 20px;
+            margin-bottom: 20px;
+        }
+
+        .ready-text {
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 0.75rem;
+            color: #999;
+            margin-bottom: 10px;
         }
 
         #staff-name {
             font-family: 'Lilita One', cursive;
-            font-size: 2rem;
-            margin: 10px 0;
+            font-size: 2.2rem;
+            margin: 5px 0;
             text-transform: uppercase;
+            line-height: 1;
         }
 
         #staff-pos {
@@ -137,21 +130,56 @@
             color: #444;
             background: #e0faff;
             display: inline-block;
-            padding: 4px 12px;
-            border-radius: 8px;
-            margin-bottom: 20px;
+            padding: 6px 16px;
+            border-radius: 12px;
+            margin: 10px 0 20px 0;
+            font-size: 0.9rem;
         }
 
         #qrcode {
             display: flex;
             justify-content: center;
-            padding: 10px;
+            margin-bottom: 20px;
         }
 
-        .footer-text {
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.5);
-            margin-top: 25px;
+        .dotted-line {
+            border-top: 2px dotted #ddd;
+            margin: 15px 0;
+            width: 100%;
+        }
+
+        .instruction {
+            font-size: 10px;
+            color: #888;
+            line-height: 1.4;
+            padding: 0 10px;
+            margin: 0;
+        }
+
+        /* BOTÓN DE DESCARGA ESTILO NEÓN */
+        .btn-download {
+            background: #111;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            padding: 16px;
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            width: 100%;
+            cursor: pointer;
+            text-transform: uppercase;
+            box-shadow: 0 0 15px rgba(0, 251, 255, 0.2);
+        }
+
+        .btn-back {
+            background: transparent;
+            border: none;
+            color: white;
+            text-decoration: underline;
+            margin-top: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9rem;
         }
     </style>
 </head>
@@ -165,10 +193,9 @@
             </div>
 
             <form id="villafestForm">
-                <input type="text" id="nombre" placeholder="Nombres y Apellidos" required="">
-                
-                <select id="posicion" required="">
-                    <option value="" disabled="" selected="">Posición de trabajo</option>
+                <input type="text" id="nombre" placeholder="Nombres y Apellidos" required>
+                <select id="posicion" required>
+                    <option value="" disabled selected>Posición de trabajo</option>
                     <option>Grinch</option>
                     <option>Casa de Santa</option>
                     <option>Realidad Virtual</option>
@@ -180,57 +207,55 @@
                     <option>rappi</option>
                     <option>portero de toldo</option>
                     <option>Enfiador de helados</option>
+                    <option>capibaras mañosos</option>
+                    <option>tómbola estafadora</option>
+                    <option>revoltosos</option>
+                    <option>ositos cariñosos</option>
+                    <option>otro</option>
                 </select>
-
-                <button type="submit">Generar Pase</button>
+                <button type="submit" class="btn-generate">GENERAR PASE</button>
             </form>
-            <p class="footer-text">Villafest 4.0 ChaufexProduction © 2025</p>
+            <p style="font-size: 0.75rem; color: rgba(255,255,255,0.4); margin-top: 25px;">Villafest 4.0 ChaufexProduction © 2025</p>
         </div>
 
         <div id="qr-result">
             <div class="ticket">
-                <div style="font-weight: bold; letter-spacing: 2px; font-size: 0.7rem; color: #888;">¿Listo para hoy?</div>
+                <div class="ready-text">¿Listo para hoy?</div>
                 <div id="staff-name"></div>
                 <div id="staff-pos"></div>
                 
                 <div id="qrcode"></div>
                 
-                <div style="margin-top: 15px; border-top: 1px dashed #ccc; padding-top: 15px;">
-                    <p style="font-size: 10px; color: #777; margin: 0;">No te olvides de tomarle captura y Presenta este código en el acceso de personal.</p>
-                </div>
+                <div class="dotted-line"></div>
+                <p class="instruction">No te olvides de tomarle captura y Presenta este código en el acceso de personal.</p>
             </div>
             
-            <button onclick="window.print()" style="border-color: var(--accent-color); color: var(--accent-color);">Descargar Pase</button>
-            <button onclick="location.reload()" style="border: none; font-size: 14px; text-decoration: underline; margin-top: 5px;">Volver</button>
+            <button class="btn-download" onclick="window.print()">DESCARGAR PASE</button>
+            <button class="btn-back" onclick="location.reload()">VOLVER</button>
         </div>
     </div>
 
     <script>
         document.getElementById('villafestForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
             const nombre = document.getElementById('nombre').value;
             const posicion = document.getElementById('posicion').value;
 
-            // Intercambiar vistas
             document.getElementById('registration-form').style.display = 'none';
             document.getElementById('qr-result').style.display = 'block';
-
-            // Llenar datos del pase
             document.getElementById('staff-name').innerText = nombre;
             document.getElementById('staff-pos').innerText = posicion;
 
-            // Generar QR
             document.getElementById('qrcode').innerHTML = "";
             new QRCode(document.getElementById("qrcode"), {
-                text: "VF4-2025-" + nombre.toUpperCase() + "-" + posicion,
+                text: "VF4-25-" + nombre.toUpperCase().trim() + "-" + posicion.toUpperCase(),
                 width: 180,
                 height: 180,
                 colorDark : "#000000",
                 colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
+                correctLevel : QRCode.CorrectLevel.L // Nivel L para permitir textos más largos sin error
             });
         });
     </script>
-
-</body></html>
+</body>
+</html>
