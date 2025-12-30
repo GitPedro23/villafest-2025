@@ -9,7 +9,7 @@
     
     <style>
         :root {
-            --accent-color: #00fbff; /* El azul vibrante que pediste */
+            --accent-color: #00fbff;
             --bg-dark: #000000;
             --glass-bg: rgba(255, 255, 255, 0.07);
         }
@@ -38,10 +38,9 @@
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
         }
 
-        /* DISEÑO DE LOGO ESTILO PLANET V.M.T */
         .logo-area {
             margin-bottom: 35px;
-            transform: rotate(-3deg); /* Inclinación del logo */
+            transform: rotate(-3deg);
         }
 
         .logo-villafest {
@@ -66,7 +65,6 @@
             text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
         }
 
-        /* FORMULARIO */
         input, select {
             width: 100%;
             padding: 16px;
@@ -107,7 +105,6 @@
             transform: scale(1.02);
         }
 
-        /* TARJETA DE PASE (QR) */
         #qr-result {
             display: none;
             animation: slideUp 0.5s ease-out;
@@ -132,6 +129,7 @@
             font-size: 2rem;
             margin: 10px 0;
             text-transform: uppercase;
+            word-wrap: break-word;
         }
 
         #staff-pos {
@@ -148,6 +146,7 @@
             display: flex;
             justify-content: center;
             padding: 10px;
+            min-height: 180px;
         }
 
         .footer-text {
@@ -218,24 +217,32 @@
             const nombre = document.getElementById('nombre').value;
             const posicion = document.getElementById('posicion').value;
 
-            // Intercambiar vistas
             document.getElementById('registration-form').style.display = 'none';
             document.getElementById('qr-result').style.display = 'block';
 
-            // Llenar datos del pase
             document.getElementById('staff-name').innerText = nombre;
             document.getElementById('staff-pos').innerText = posicion;
 
-            // Generar QR
-            document.getElementById('qrcode').innerHTML = "";
-            new QRCode(document.getElementById("qrcode"), {
-                text: "VF4-2025-" + nombre.toUpperCase() + "-" + posicion,
-                width: 180,
-                height: 180,
-                colorDark : "#000000",
-                colorLight : "#ffffff",
-                correctLevel : QRCode.CorrectLevel.H
-            });
+            // Limpiar el contenedor antes de generar
+            const qrContainer = document.getElementById('qrcode');
+            qrContainer.innerHTML = "";
+
+            // Crear el texto del QR de forma segura
+            const qrText = "VF4-2025-" + nombre.trim().toUpperCase() + "-" + posicion.trim();
+
+            try {
+                new QRCode(qrContainer, {
+                    text: qrText,
+                    width: 180,
+                    height: 180,
+                    colorDark : "#000000",
+                    colorLight : "#ffffff",
+                    correctLevel : QRCode.CorrectLevel.M // Nivel medio para mayor compatibilidad
+                });
+            } catch (err) {
+                console.error("Error al generar QR:", err);
+                qrContainer.innerHTML = "<p style='color:black;font-size:12px;'>Error al generar código. Intenta con un nombre más corto.</p>";
+            }
         });
     </script>
 </body>
